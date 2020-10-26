@@ -7,10 +7,11 @@ namespace MiniGameSDK
     public class NoneRewardAd : IRewardAdAPI
     {
         public bool isNotUseAd { get; set; }
-        public Action<bool> onClose { get; set; }
+        public event Action<bool> onClose;
 
         public void AutoShow(Action<bool> onclose)
         {
+            onclose += onClose;
             onclose?.Invoke(true);
         }
 
