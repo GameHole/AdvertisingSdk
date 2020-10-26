@@ -5,7 +5,7 @@ namespace MiniGameSDK
 {
     public class NoneInsterAd : IInterstitialAdAPI
     {
-        public Action<bool> onClose { get; set; }
+        public event Action<bool> onClose;
 
         public bool isReady()
         {
