@@ -1,0 +1,19 @@
+{
+    "name": "YLH.Editor",
+    "references": [
+        "GUID:3825d68d10d4daa4bbf99d15463bc3a0",
+        "GUID:84ffd2ae0c425e941964896fa1a44407",
+        "GUID:5b36311bf6883e348939dcfe19fa5601"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
