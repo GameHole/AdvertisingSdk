@@ -6,7 +6,5 @@
   "unity": "2018.3",
   "license": "MIT",
   "dependencies": {
-  "com.enred.androidhelper":"",
-  "com.advertisingsdk.basic":""
   }
 }
