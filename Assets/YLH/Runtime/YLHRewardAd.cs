@@ -6,9 +6,10 @@ using UnityEngine;
 namespace MiniGameSDK
 {
 #if UNITY_ANDROID
-    class AndroidRewardAd : IRewardAdAPI
+    class AndroidRewardAd : IRewardAdAPI,IRewardAdClicked
     {
         public bool isNotUseAd { get; set; }
+        public Action OnAdClicked { get; set ; }
 
         public event Action<bool> onClose;
         public TaskCompletionSource<bool> tcs;
@@ -65,6 +66,7 @@ namespace MiniGameSDK
 
         void onAdClick()
         {
+            ad.OnAdClicked?.Invoke();
             Debug.Log("Reward onAdClick");
         }
 
