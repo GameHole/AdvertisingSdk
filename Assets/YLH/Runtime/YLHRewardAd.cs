@@ -5,29 +5,61 @@ using System.Threading.Tasks;
 using UnityEngine;
 namespace MiniGameSDK
 {
+    class RewardMono:MonoBehaviour
+    {
+        public AndroidRewardAd android;
+        private void OnApplicationFocus(bool focus)
+        {
+            //Debug.Log(focus);
+            //Debug.Log(android.isShowed);
+            if (focus && android.isShowed)
+            {
+                android.LoadAd();
+                //await Task.Delay(200);
+                //android.ShowInternal();
+            }
+        }
+    }
 #if UNITY_ANDROID
     class AndroidRewardAd : IRewardAdAPI,IRewardAdClicked
     {
+        internal RewardMono mono;
         public bool isNotUseAd { get; set; }
         public Action OnAdClicked { get; set ; }
-
+        internal bool isShowed;
         public event Action<bool> onClose;
         public TaskCompletionSource<bool> tcs;
-
+        YLHProxy proxy;
         public Action<bool> onClosed;
+        public void OnClosedInternal(bool v)
+        {
+            onClose?.Invoke(v);
+        }
         public void AutoShow(Action<bool> onclose)
         {
-            onClosed = onclose + onClose;
+            this.onClosed = onclose;
             Show();
         }
         public AndroidRewardAd()
         {
+            Init();
             LoadAd();
         }
-        async void LoadAd()
+        void Init()
+        {
+            var o = new GameObject();
+            o.hideFlags = HideFlags.DontSave | HideFlags.HideInHierarchy;
+            mono = o.AddComponent<RewardMono>();
+            mono.android = this;
+            proxy = new YLHProxy()
+            {
+                ad = this
+            };
+        }
+        internal async void LoadAd()
         {
             await Task.Delay(200);
-            YLHProvider.Get().CallStatic("LoadRewardAd", "mark", new YLHProxy() { ad = this });
+            YLHProvider.Get().CallStatic("LoadRewardAd", "mark", proxy);
         }
         public bool isReady()
         {
@@ -39,9 +71,17 @@ namespace MiniGameSDK
             if (isNotUseAd)
             {
                 onClosed?.Invoke(true);
-                tcs?.SetResult(true);
+                onClosed = null;
+                if (tcs != null && !tcs.Task.IsCompleted)
+                    tcs.SetResult(true);
+                OnClosedInternal(true);
                 return;
             }
+            isShowed = true;
+            ShowInternal();
+        }
+        internal void ShowInternal()
+        {
             YLHProvider.Get().CallStatic("ShowRewardAd", "mark");
         }
 
@@ -74,6 +114,9 @@ namespace MiniGameSDK
         {
             ad.onClosed?.Invoke(isReward);
             ad.tcs.SetResult(isReward);
+            ad.onClosed = null;
+            ad.OnClosedInternal(isReward);
+            ad.isShowed = false;
             Debug.Log("Reward onAdClose");
         }
 

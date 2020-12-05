@@ -10,6 +10,10 @@ namespace MiniGameSDK
         {
             YLHProvider.log?.CallStatic("SendRigEve", "mark", ch, isSuccess);
         }
+        public static void SendAchievement(string parm, int lv)
+        {
+            YLHProvider.log?.CallStatic("onEventAchievement", "mark", parm, lv);
+        }
         public static void SendEvent(string key,Dictionary<string,string> values)
         {
             StringBuilder builder = new StringBuilder();

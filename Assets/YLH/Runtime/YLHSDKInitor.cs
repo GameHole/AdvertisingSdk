@@ -5,12 +5,12 @@ namespace MiniGameSDK
 {
     public class YLHSDKInitor : MonoBehaviour
     {
-        public bool notUseAd;
+        //public bool notUseAd;
         public bool debug;
         IRewardAdAPI reward;
         void Awake()
         {
-            reward.isNotUseAd = notUseAd;
+            //reward.isNotUseAd = notUseAd;
 #if UNITY_ANDROID
             Init();
 #endif
