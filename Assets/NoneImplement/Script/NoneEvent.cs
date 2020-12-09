@@ -13,5 +13,10 @@ namespace MiniGameSDK
         {
             
         }
+
+        public void SetEvent(string key, params KVPair[] pairs)
+        {
+            
+        }
     }
 }
