@@ -6,9 +6,9 @@ using System.IO;
 
 namespace MiniGameSDK
 {
-	public class UmSetting
+	public class UmSetting:IParamSettng
 	{
-        [MenuItem("友盟/设置参数")]
+        //[MenuItem("友盟/设置参数")]
         static void Set()
         {
             AssetHelper.CreateAsset<UmParameter>();
@@ -37,5 +37,10 @@ namespace MiniGameSDK
             File.WriteAllText($"{dir}/EveKeys.cs", builder.ToString());
             AssetDatabase.Refresh();
         }
-	}
+
+        public void SetParam()
+        {
+            Set();
+        }
+    }
 }
