@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Refinter;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 namespace MiniGameSDK
 {
+    [Important(int.MinValue)]
     public class NoneRewardAd : IRewardAdAPI
     {
         public bool isNotUseAd { get; set; }

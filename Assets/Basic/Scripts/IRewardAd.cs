@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 namespace MiniGameSDK
 {
-    public interface IAdAPI: IInterface
+    public interface IAdAPI
     {
         bool isReady();
     }
-    public interface IRewardAdAPI: IAdAPI
+    public interface IRewardAdAPI: IAdAPI,IInterface
     {
         bool isNotUseAd { get; set; }
         event Action<bool> onClose;

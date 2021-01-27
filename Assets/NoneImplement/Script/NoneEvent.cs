@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Refinter;
+using System.Collections.Generic;
 using UnityEngine;
 namespace MiniGameSDK
 {
+    [Important(int.MinValue)]
     public class NoneEvent : IAnalyzeEvent
     {
         public void SetEvent(string key)

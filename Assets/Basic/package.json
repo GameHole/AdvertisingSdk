@@ -6,6 +6,5 @@
   "unity": "2018.3",
   "license": "MIT",
   "dependencies": {
-  "com.refinter.basic":"1.0.0"
   }
 }

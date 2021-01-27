@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MiniGameSDK
 {
     [InitializeOnLoad]
-	public class Setting
+	public class Setting:IParamSettng
 	{
         static Setting()
         {
@@ -22,17 +22,16 @@ namespace MiniGameSDK
             await Task.Delay(500);
             Set();
         }
-        [MenuItem("优量宝/设置参数")]
+        //[MenuItem("优量宝/设置参数")]
         static void Set()
         {
             AssetHelper.CreateAsset<LogParm>();
             AssetHelper.CreateAsset<Values>();
             SetXml();
-            GradleHelper.SetImplementation("com.lovedise:permissiongen:0.0.6");
             GradleHelper.SetImplementation("com.android.support:support-v4:28.0.0");
             AssetDatabase.Refresh();
         }
-        [MenuItem("优量宝/设置Log参数")]
+        //[MenuItem("优量宝/设置Log参数")]
         static void SetLog()
         {
             _SetLog();
@@ -89,6 +88,12 @@ namespace MiniGameSDK
             }
            
             dc.Save();
+        }
+
+        public void SetParam()
+        {
+             Set();
+            SetLog();
         }
     }
 }

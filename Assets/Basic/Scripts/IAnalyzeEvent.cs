@@ -18,6 +18,18 @@ namespace MiniGameSDK
     {
         void SetEvent(string key);
         void SetEvent(string key, Dictionary<string, string> value);
-        void SetEvent(string key, params KVPair[] pairs);
+        //void SetEvent(string key, params KVPair[] pairs);
+    }
+    public static class AnalyzeEventEx
+    {
+        public static void SetEvent(this IAnalyzeEvent analyze, string key, params KVPair[] pairs)
+        {
+            var p = new Dictionary<string, string>();
+            foreach (var item in pairs)
+            {
+                p.Add(item.key, item.value);
+            }
+            analyze.SetEvent(key, p);
+        }
     }
 }
