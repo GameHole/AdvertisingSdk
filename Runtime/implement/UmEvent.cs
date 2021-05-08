@@ -8,7 +8,13 @@ namespace MiniGameSDK
     {
         public UmEvent()
         {
-            var param = AScriptableObject.Get<UmParameter>();
+            var paramAc = AScriptableObject.Get<UmParameter>();
+            UmParameterBase param = null;
+#if UNITY_ANDROID
+            param = paramAc.android;
+#elif UNITY_IOS
+            param = paramAc.ios;
+#endif
             if (param.debug)
             {
                 Debug.Log($"umeng start appid = {param.appid} channal = {param.channal}");
