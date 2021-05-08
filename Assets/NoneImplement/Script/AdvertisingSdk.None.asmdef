@@ -1,0 +1,15 @@
+{
+    "name": "AdvertisingSdk.None",
+    "references": [
+        "GUID:4d3550b39870a3340acb77ecf9af76ab",
+        "GUID:9eabb7fb16a32a142a87cd461b3444f3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

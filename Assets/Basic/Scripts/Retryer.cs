@@ -14,9 +14,10 @@ namespace MiniGameSDK
     {
         List<RetryValue> values = new List<RetryValue>();
         NetworkReachability netState;
+        public int basicCount;
         public void Regist(IReloader action)
         {
-            var v = new RetryValue() { action = action };
+            var v = new RetryValue() { action = action, basicCount = basicCount };
             v.Load();
             values.Add(v);
         }
@@ -81,6 +82,7 @@ namespace MiniGameSDK
             public bool isStart;
             int _id;
             int retryCount;
+            public int basicCount;
             internal int loadId
             {
                 get
@@ -96,7 +98,8 @@ namespace MiniGameSDK
                     action.onReloaded = (v) =>
                     {
                         isLoaded = v;
-                        if (!v && retryCount < action.RetryCount)
+                        bool canRetry = basicCount == -1 ? true : retryCount < action.RetryCount + basicCount;
+                        if (!v && canRetry)
                         {
                             Restart();
                         }
@@ -106,14 +109,27 @@ namespace MiniGameSDK
                         }
                     };
                 }
-                action.Reload(loadId);
+                try
+                {
+                    action.Reload(loadId);
+                }
+                catch (Exception)
+                {
+                    Restart();
+                }
             }
             void Restart()
             {
                 retryCount++;
                 add = 0;
-                time += 1;
+                time = getNextTime(time);
                 isStart = true;
+            }
+            float getNextTime(float basicTime)
+            {
+                if (basicCount == -1)
+                    return 3;
+                return basicTime + 1;
             }
             void Clear()
             {

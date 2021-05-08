@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace MiniGameSDK
 {
-    [Important(int.MinValue)]
+    [Important(-1000)]
     public class NoneEvent : IAnalyzeEvent
     {
         public void SetEvent(string key)

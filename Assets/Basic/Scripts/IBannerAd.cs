@@ -9,5 +9,7 @@ namespace MiniGameSDK
         void Show();
         Action<int> onClose { get; set; }
         Action onHide { get; set; }
-	}
+        event Action onShow;
+
+    }
 }

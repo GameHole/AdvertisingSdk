@@ -4,7 +4,7 @@ using UnityEngine;
 using Refinter;
 namespace MiniGameSDK
 {
-    [Important(int.MinValue)]
+    [Important(-1000)]
     public class NoneInsterAd : IInterstitialAdAPI
     {
         public event Action<bool> onClose;

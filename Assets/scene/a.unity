@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 1113319432}
   - component: {fileID: 1113319431}
   - component: {fileID: 1113319433}
+  - component: {fileID: 1113319434}
   m_Layer: 0
   m_Name: RefinteInitializer
   m_TagString: Untagged
@@ -312,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e598f802cca8a3f4eb19c7e7b7720d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!4 &1113319432
 Transform:
   m_ObjectHideFlags: 0
@@ -338,8 +340,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdb5af2cb1f3fb489ea060aa0e1a279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notUseAd: 0
   debug: 0
+--- !u!114 &1113319434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113319430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ffb75bbcdb3d74f804ba27bac9cb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicCount: 0
 --- !u!1 &1533518270
 GameObject:
   m_ObjectHideFlags: 0

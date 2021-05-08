@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 namespace MiniGameSDK
 {
-    [Important(int.MinValue)]
+    [Important(-1000)]
     public class NoneRewardAd : IRewardAdAPI
     {
         public bool isNotUseAd { get; set; }

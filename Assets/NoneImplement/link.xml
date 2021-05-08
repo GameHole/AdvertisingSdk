@@ -1,0 +1,5 @@
+<linker>
+  <assembly fullname="AdvertisingSdk.None" ignoreIfMissing="1">
+    <type fullname="MiniGameSDK.*" preserve="all"/>
+  </assembly>
+</linker>

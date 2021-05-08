@@ -12,6 +12,7 @@ namespace MiniGameSDK
         public bool useReShow;
         private void Start()
         {
+            banner = Refinter.Reflection.Get<IBannerAd>();
             banner.onClose += (v) =>
             {
                 StartCountDown();
@@ -23,11 +24,13 @@ namespace MiniGameSDK
         }
         public void StartCountDown()
         {
+            //Debug.Log("StartCountDown");
             add = 0;
             isRun = useReShow;
         }
         public void StopCountDown()
         {
+            //Debug.Log("StopCountDown");
             isRun = false;
         }
         private void Update()
@@ -41,6 +44,7 @@ namespace MiniGameSDK
                     isRun = false;
                     if (useReShow)
                     {
+                        //Debug.Log("auot show");
                         banner?.Show();
                     }
                 }
