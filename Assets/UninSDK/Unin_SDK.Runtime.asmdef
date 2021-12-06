@@ -1,0 +1,16 @@
+{
+    "name": "Unin_SDK.Runtime",
+    "references": [
+        "GUID:9eabb7fb16a32a142a87cd461b3444f3",
+        "GUID:4d3550b39870a3340acb77ecf9af76ab"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": []
+}
