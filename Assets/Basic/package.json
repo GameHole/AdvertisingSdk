@@ -1,10 +1,11 @@
 {
   "name": "com.advertisingsdk.basic",
   "displayName": "AdvertisingSdk.Basic",
-  "description": "广告sdk 基础接口信息",
-  "version": "1.0.0",
+  "description": "骞垮憡sdk鎺ュ彛",
+  "version": "1.0.1",
   "unity": "2018.3",
   "license": "MIT",
   "dependencies": {
+    "com.refinter.basic": "1.0.0"
   }
 }

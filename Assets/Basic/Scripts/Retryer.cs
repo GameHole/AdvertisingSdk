@@ -10,15 +10,20 @@ namespace MiniGameSDK
         void Reload(int id);
         Action<bool> onReloaded { get; set; }
     }
-    public class Retryer :MonoBehaviour,IRetryer
+    public class Retryer :MonoBehaviour,IRetryer,IRetryerCtrl
     {
         List<RetryValue> values = new List<RetryValue>();
         NetworkReachability netState;
         public int basicCount;
+        public bool loadInAwake = true;
+        public bool IsRun { get => loadInAwake; set => loadInAwake = value; }
+
         public void Regist(IReloader action)
         {
-            var v = new RetryValue() { action = action, basicCount = basicCount };
-            v.Load();
+            //Debug.Log("Regist = " + action);
+            var v = new RetryValue(action,basicCount);
+            //v.Load();
+            v.Start();
             values.Add(v);
         }
         //private void Awake()
@@ -31,16 +36,19 @@ namespace MiniGameSDK
         }
         private void Update()
         {
-            foreach (var item in values)
+            if (IsRun)
             {
-                if (item.isStart)
+                foreach (var item in values)
                 {
-                    item.add += Time.deltaTime;
-                    if (item.add >= item.time)
+                    if (item.isStart)
                     {
-                        item.add = 0;
-                        item.isStart = false;
-                        item.Load();
+                        item.add += Time.deltaTime;
+                        if (item.add >= item.time)
+                        {
+                            item.add = 0;
+                            item.isStart = false;
+                            item.Load();
+                        }
                     }
                 }
             }
@@ -53,8 +61,9 @@ namespace MiniGameSDK
                     {
                         if (!item.isLoaded)
                         {
-                            item.Load();
-                            item.isLoaded = true;
+                            //item.Load();
+                            item.Start();
+                            //item.isLoaded = true;
                         }
                     }
                 }
@@ -91,24 +100,32 @@ namespace MiniGameSDK
                 }
             }
             internal IReloader action;
+            public RetryValue(IReloader action,int basicCount)
+            {
+                this.action = action;
+                this.basicCount = basicCount;
+                this.action.onReloaded += (v) =>
+                {
+                    isLoaded = v;
+                    bool canRetry = basicCount == -1 ? true : retryCount < action.RetryCount + basicCount;
+                    if (!v && canRetry)
+                    {
+                        Restart();
+                    }
+                    else
+                    {
+                        Clear();
+                    }
+                };
+            }
             public void Load()
             {
-                if (action.onReloaded == null)
-                {
-                    action.onReloaded = (v) =>
-                    {
-                        isLoaded = v;
-                        bool canRetry = basicCount == -1 ? true : retryCount < action.RetryCount + basicCount;
-                        if (!v && canRetry)
-                        {
-                            Restart();
-                        }
-                        else
-                        {
-                            Clear();
-                        }
-                    };
-                }
+                //Debug.Log("load = " + action);
+                //if (action.onReloaded == null)
+                //{
+
+                //}
+                
                 try
                 {
                     action.Reload(loadId);
@@ -118,9 +135,16 @@ namespace MiniGameSDK
                     Restart();
                 }
             }
+            public void Start()
+            {
+                add = 0;
+                time = 0;
+                isStart = true;
+            }
             void Restart()
             {
                 retryCount++;
+                //Debug.Log(action +" retry count " + retryCount);
                 add = 0;
                 time = getNextTime(time);
                 isStart = true;
