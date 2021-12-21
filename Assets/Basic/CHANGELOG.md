@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - 添加自动重载控制接口IRetryCtrl,自定义加载时机。
 
+###添加Banner设置
+
+- 添加banner设置接口，Gravity定义。
+
 ### 添加更新日志.
 
 - 
